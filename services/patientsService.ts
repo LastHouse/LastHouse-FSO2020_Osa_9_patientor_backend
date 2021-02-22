@@ -6,25 +6,34 @@ import {
   PatientEntry,
   NonSensitivePatientEntry,
   NewPatientEntry,
+  Patient,
 } from '../types';
 
-const patients: Array<PatientEntry> = patientsData as Array<PatientEntry>;
+const patients: Array<Patient> = patientsData as Array<Patient>;
 
 const getPatients = (): Array<PatientEntry> => {
   return patients;
 };
 
-const getNonSensitivePatientData = (): Array<NonSensitivePatientEntry> => {
-  return patients.map(({ id, name, dateOfBirth, gender, occupation }) => ({
-    id,
-    name,
-    dateOfBirth,
-    gender,
-    occupation,
-  }));
+const getPatient = (id: string): Array<Patient> => {
+  const patient = patients.filter((patient) => patient.id === id);
+  return patient;
 };
 
-const addPatient = (entry: NewPatientEntry): PatientEntry => {
+const getNonSensitivePatientData = (): Array<NonSensitivePatientEntry> => {
+  return patients.map(
+    ({ id, name, dateOfBirth, gender, occupation, entries }) => ({
+      id,
+      name,
+      dateOfBirth,
+      gender,
+      occupation,
+      entries,
+    })
+  );
+};
+
+const addPatient = (entry: NewPatientEntry): Patient => {
   const newPatientEntry = {
     id: uuid(),
     ...entry,
@@ -38,4 +47,5 @@ export default {
   getPatients,
   getNonSensitivePatientData,
   addPatient,
+  getPatient,
 };

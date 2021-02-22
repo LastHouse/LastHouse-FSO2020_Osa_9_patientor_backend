@@ -1,4 +1,4 @@
-import { PatientEntry } from '../types';
+import { Patient } from '../types';
 import toNewPatientEntry from '../utils';
 
 const data = [
@@ -44,8 +44,8 @@ const data = [
   },
 ];
 
-const patientEntries: Array<PatientEntry> = data.map((obj) => {
-  const object = toNewPatientEntry(obj) as PatientEntry;
+const patientEntries: Array<Patient> = data.map((obj) => {
+  const object = toNewPatientEntry(obj) as Patient;
   object.id = obj.id;
   return object;
 });

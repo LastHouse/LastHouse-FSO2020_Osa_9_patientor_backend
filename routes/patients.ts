@@ -6,6 +6,17 @@ import toNewPatientEntry from '../utils';
 
 const router = express.Router();
 
+router.get('/:id', (req, res) => {
+  console.log(req.params.id);
+  try {
+    const id: string = req.params.id;
+    const singlePatient = patientsService.getPatient(id);
+    res.json(singlePatient);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
 router.get('/', (_req, res) => {
   res.send(patientsService.getNonSensitivePatientData());
 });

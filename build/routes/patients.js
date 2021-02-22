@@ -8,6 +8,17 @@ const express_1 = __importDefault(require("express"));
 const patientsService_1 = __importDefault(require("../services/patientsService"));
 const utils_1 = __importDefault(require("../utils"));
 const router = express_1.default.Router();
+router.get('/:id', (req, res) => {
+    console.log(req.params.id);
+    try {
+        const id = req.params.id;
+        const singlePatient = patientsService_1.default.getPatient(id);
+        res.json(singlePatient);
+    }
+    catch (error) {
+        res.status(400).send(error.message);
+    }
+});
 router.get('/', (_req, res) => {
     res.send(patientsService_1.default.getNonSensitivePatientData());
 });

@@ -10,13 +10,18 @@ const patients = patients_2.default;
 const getPatients = () => {
     return patients;
 };
+const getPatient = (id) => {
+    const patient = patients.filter((patient) => patient.id === id);
+    return patient;
+};
 const getNonSensitivePatientData = () => {
-    return patients.map(({ id, name, dateOfBirth, gender, occupation }) => ({
+    return patients.map(({ id, name, dateOfBirth, gender, occupation, entries }) => ({
         id,
         name,
         dateOfBirth,
         gender,
         occupation,
+        entries,
     }));
 };
 const addPatient = (entry) => {
@@ -28,4 +33,5 @@ exports.default = {
     getPatients,
     getNonSensitivePatientData,
     addPatient,
+    getPatient,
 };
